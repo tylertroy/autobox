@@ -29,9 +29,9 @@ In the `CloudinaryUpload` class, modify `defaults` with your cloudinary authenti
 def __init__(self, session_path='', cloud_name='', api_key='', api_secret=''):	
   """Configure cloudinary with API codes for image uploading."""
   defaults = [ 
-    "#########",                  # Cloud name.
-    "###############",            # API key.
-    "###########################"	# API secret.
+    "#########",                   # Cloud name.
+    "###############",             # API key.
+    "###########################"  # API secret.
     ]
 ```
 
