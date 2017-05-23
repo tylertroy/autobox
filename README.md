@@ -1,11 +1,13 @@
 # Autobox
-An automated data labeling script for the preparation of machine learning data.
+An automated data labeling command-line script for the preparation of machine learning data.
 
 ## Description
 
 Autobox was designed to automate the arduous task of defining bounding boxes around objects of interest in an image. It was made for preparing training data for use with training convolutional neural networks in particular the [YOLO](https://pjreddie.com/darknet/yolo/) model.
 
 This python script creates a convenient script-based front end wrapping APIs from the [Cloudinary](http://cloudinary.com/) image hosting service and the [ScaleAPI](https://www.scaleapi.com/) human task service.
+
+After setting up these accounts you simply point the script to your directory of images to be annotated.  
 
 ## Requirements
 
@@ -23,7 +25,7 @@ You should first determine your authentication credentials for both Cloudinary a
 
 In the `CloudinaryUpload` class, modify `defaults` with your cloudinary authentication details.
 
-```
+```python
 def __init__(self, session_path='', cloud_name='', api_key='', api_secret=''):	
   """Configure cloudinary with API codes for image uploading."""
   defaults = [ 
@@ -36,7 +38,8 @@ def __init__(self, session_path='', cloud_name='', api_key='', api_secret=''):
 ### `wrap_scale.py` (ScaleAPI)
 
 In the `ScaleTaskManager` class, modify `key` with your ScaleAPI key.
-```
+
+```python
 def __init__(self, session_path='', key=None):
     # Initialize client key.
     if not key: # Use hardcoded key below.
@@ -45,7 +48,7 @@ def __init__(self, session_path='', key=None):
 
 Modify `callback_url`, `instruction`, `objects_to_annotate`, and `example` in `ScaleTaskManager.create_task` to reflect the requirements for your image labelling task. See [here](https://docs.scaleapi.com/#create-image-annotation-task) for more details on these variables,
 
-```
+```python
 def create_task(self, image_url):
     """Create a bounding box task with scale API.
     """
@@ -70,14 +73,14 @@ def create_task(self, image_url):
 
 Autobox consists of a series of methods for handling the process. These are described by running the script without arguments but are reproduced here for convenience.
 
-```
+```bash
 ./autobox.py <method> <args>
 ```
 ### Methods (create, retrieve, cancel, delete)
 
 
 #### create
-```
+```bash
 ./autobox.py create /path/to/session /path/to/images/
 ```
 
@@ -89,7 +92,7 @@ Autobox consists of a series of methods for handling the process. These are desc
 _N.B. Task logs are used to cancel, retrieve, and delete tasks from a session._
 
 #### retrieve
-```
+```bash
 ./autobox.py retrieve /path/to/session
 ```
 
@@ -98,14 +101,14 @@ _N.B. Task logs are used to cancel, retrieve, and delete tasks from a session._
 
 
 #### cancel
-```
+```bash
 ./autobox.py cancel /path/to/session
 ```
 
 * Cancel all incomplete tasks in this session.
 
 #### close
-```
+```bash
 ./autobox.py close /path/to/session
 ```
 
